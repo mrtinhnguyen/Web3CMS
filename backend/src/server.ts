@@ -24,7 +24,7 @@ const facilitatorUrl = process.env.CDP_API_KEY_ID
   ? `https://facilitator.cdp.coinbase.com` // CDP facilitator
   : process.env.X402_FACILITATOR_URL || 'https://x402.org/facilitator'; // Public fallback
 
-const network = process.env.X402_NETWORK || 'base-sepolia';
+const network = process.env.X402_NETWORK || 'base';
 
 console.log(`🔗 x402 Facilitator: ${facilitatorUrl}`);
 console.log(`🌐 Network: ${network}`);
@@ -38,7 +38,7 @@ if (process.env.CDP_API_KEY_ID) {
 // Health check endpoint
 app.get('/api/health', (req: Request, res: Response) => {
   res.json({
-    message: 'Penny.io backend is running!',
+    message: 'WritingAndEarn.xyz backend is running!',
     timestamp: new Date().toISOString(),
     version: '1.0.0',
     facilitator: facilitatorUrl,
@@ -75,7 +75,7 @@ app.use((req: Request, res: Response) => {
 });
 
 const server = app.listen(PORT, () => {
-  console.log(`🚀 Penny.io backend server running on port ${PORT}`);
+  console.log(`🚀 WritingAndEarn.xyz backend server running on port ${PORT}`);
   console.log(`📚 API documentation available at http://localhost:${PORT}/api/health`);
 });
 

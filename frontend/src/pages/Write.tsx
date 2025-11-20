@@ -173,7 +173,7 @@ function Write() {
   };
 
   const getShareText = () => {
-    return `Check out my Penny.io article ... ${publishedArticleTitle}`;
+    return `Check out my WritingAndEarn.xyz article ... ${publishedArticleTitle}`;
   };
 
   const shareOnX = () => {

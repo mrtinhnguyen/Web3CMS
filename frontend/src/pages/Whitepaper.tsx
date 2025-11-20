@@ -9,7 +9,7 @@ function Whitepaper() {
           <div className="hero-icon">
             <FileText size={48} />
           </div>
-          <h1>Penny.io Technical Whitepaper</h1>
+          <h1>WritingAndEarn.xyz Technical Whitepaper</h1>
           <p className="hero-subtitle">
             A comprehensive guide to micropayment-based content monetization using the x402 protocol
           </p>

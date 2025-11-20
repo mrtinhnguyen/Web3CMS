@@ -1,6 +1,6 @@
 <div align="center">
 
-# Penny.io – Wallet‑Native Micropayments for Web Publishing
+# WritingAndEarn.xyz – Wallet‑Native Micropayments for Web Publishing
 
 Pay‑per‑article access, instant author payouts, and dual‑network wallet support powered by the x402 payment protocol.
 
@@ -10,7 +10,7 @@ Pay‑per‑article access, instant author payouts, and dual‑network wallet su
 
 ## Table of Contents
 
-1. [About Penny.io](#about-pennyio)  
+1. [About WritingAndEarn.xyz](#about-writingandearnxyz)  
 2. [Key Features](#key-features)  
 3. [Architecture](#architecture)  
 4. [x402 Payment Flow](#x402-payment-flow)  
@@ -24,9 +24,9 @@ Pay‑per‑article access, instant author payouts, and dual‑network wallet su
 
 ---
 
-## About Penny.io
+## About WritingAndEarn.xyz
 
-Penny.io is a fully wallet‑native publishing platform aimed at technical and crypto writers who want precise control over pricing and payouts. Instead of subscriptions, readers unlock individual articles for $0.01–$1.00 using the **x402 HTTP payment protocol**. Writers get paid in seconds (not weeks) and can manage payouts across **Base** and **Solana** with a dual‑wallet workflow.
+WritingAndEarn.xyz is a fully wallet‑native publishing platform aimed at technical and crypto writers who want precise control over pricing and payouts. Instead of subscriptions, readers unlock individual articles for $0.01–$1.00 using the **x402 HTTP payment protocol**. Writers get paid in seconds (not weeks) and can manage payouts across **Base** and **Solana** with a dual‑wallet workflow.
 
 Why it matters:
 
@@ -68,7 +68,7 @@ Why it matters:
 ## Architecture
 
 ```
-Penny_dev/
+WritingAndEarn_dev/
 ├── frontend/    # React + TypeScript + Vite SPA
 │   ├── src/pages (Dashboard, Article, Explore, X402Test, etc.)
 │   ├── src/services (api, x402PaymentService, wallet helpers)
@@ -139,8 +139,8 @@ For a deeper dive (authorization vs settlement, gas math, code samples), see [`x
 ### Installation
 
 ```bash
-git clone https://github.com/<your-org>/Penny_dev.git
-cd Penny_dev
+git clone https://github.com/<your-org>/WritingAndEarn_dev.git
+cd WritingAndEarn_dev
 npm install          # installs root, backend, and frontend deps via workspaces
 ```
 

@@ -57,7 +57,7 @@ function Footer() {
   const solanaAddress = 'cAXdcMFHK6y9yTP7AMETzXC7zvTeDBbQ5f4nvSWDx51';
   const baseAddress = '0xEc115640B09416a59fE77e4e7b852fE700Fa6bF1';
   const predefinedAmounts = [1, 5, 25, 50];
-  const DONATION_STORAGE_KEY = 'penny:lastDonation';
+  const DONATION_STORAGE_KEY = 'writingandearn:lastDonation';
   const DONATION_NETWORK_META: Record<'base' | 'solana', { title: string; caipNetworkId: string }> = {
     base: {
       title: 'Base USDC',
@@ -311,7 +311,7 @@ function Footer() {
   const getNetworkFromChain = (chainId?: number): SupportedNetwork => {
     if (chainId === 8453) return 'base';          // Base mainnet
     if (chainId === 84532) return 'base-sepolia'; // Base Sepolia
-    return 'base-sepolia'; // Default to testnet for safety
+    return 'base'; // Default to Base mainnet
   };
 
   // Donation using x402 payment flow with Base + Solana support
@@ -377,7 +377,7 @@ function Footer() {
       <div className="container">
         <div className="footer-content">
           <div className="footer-section">
-            <h3>Penny.io</h3>
+            <h3>WritingAndEarn.xyz</h3>
             <p>Content Monetization Reimagined</p>
             {/* Action Buttons */}
             <div className="footer-actions">
@@ -436,7 +436,7 @@ function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; 2025 Penny.io. All rights reserved.</p>
+          <p>&copy; 2025 WritingAndEarn.xyz. All rights reserved.</p>
           <div className="footer-links">
             <Link to="/privacy">Privacy Policy</Link>
             <Link to="/terms">Terms of Service</Link>
@@ -460,7 +460,7 @@ function Footer() {
             <div className="donation-modal-header">
               <div className="donation-modal-title">
                 <HeartHandshake size={18} />
-                <h3 id="donation-modal-title">Support Penny.io</h3>
+                <h3 id="donation-modal-title">Support WritingAndEarn.xyz</h3>
               </div>
               <button
                 type="button"
@@ -474,7 +474,7 @@ function Footer() {
             <div className="donation-modal-grid">
               <section className="donation-summary-column">
                 <div className="donation-impact-card">
-                  <h4>Thank you for using Penny.io</h4>
+                  <h4>Thank you for using WritingAndEarn.xyz</h4>
                   <p>Donations cover hosting fees, improvements, and new features.</p>
                 </div>
 
@@ -562,7 +562,7 @@ function Footer() {
                     @devinggold
                   </a>
                   <a
-                    href="https://github.com/Max-the-dev/Penny.io"
+                    href="https://github.com/Max-the-dev/WritingAndEarn.xyz"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="donation-social-link"

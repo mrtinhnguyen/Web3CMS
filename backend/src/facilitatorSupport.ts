@@ -15,9 +15,13 @@ let feePayerCache: Record<string, string> | null = null;
 let hydratePromise: Promise<void> | null = null;
 
 async function hydrateCache(): Promise<void> {
+  if (!process.env.CDP_API_KEY_ID || !process.env.CDP_API_KEY_SECRET) {
+    throw new Error('CDP API keys not configured');
+  }
+  
   const token = await generateJwt({
-    apiKeyId: process.env.CDP_API_KEY_ID!,
-    apiKeySecret: process.env.CDP_API_KEY_SECRET!,
+    apiKeyId: process.env.CDP_API_KEY_ID,
+    apiKeySecret: process.env.CDP_API_KEY_SECRET,
     requestMethod: 'GET',
     requestHost,
     requestPath: supportedPath,
@@ -45,10 +49,19 @@ async function hydrateCache(): Promise<void> {
 
 export async function ensureFacilitatorSupportLoaded(): Promise<void> {
   if (feePayerCache) return;
+  
+  // Skip if CDP keys are not configured
+  if (!process.env.CDP_API_KEY_ID || !process.env.CDP_API_KEY_SECRET) {
+    console.log('⚠️  CDP API keys not configured, skipping facilitator cache warm');
+    return;
+  }
+  
   if (!hydratePromise) {
     hydratePromise = hydrateCache().catch(err => {
       hydratePromise = null;
-      throw err;
+      console.warn('⚠️  Failed to warm facilitator cache:', err.message);
+      // Don't throw - allow server to continue without CDP support
+      return;
     });
   }
   await hydratePromise;

@@ -56,7 +56,7 @@ type NetworkGroup = 'evm' | 'solana';
 const DEFAULT_X402_NETWORK: SupportedX402Network =
   SUPPORTED_X402_NETWORKS.includes((process.env.X402_NETWORK || '') as SupportedX402Network)
     ? (process.env.X402_NETWORK as SupportedX402Network)
-    : 'base-sepolia';
+    : 'base';
 
 const DEFAULT_EVM_PAYOUT_NETWORK: SupportedPayoutNetwork =
   DEFAULT_X402_NETWORK === 'base' || DEFAULT_X402_NETWORK === 'base-sepolia'
@@ -204,7 +204,7 @@ const PLATFORM_EVM_ADDRESS = normalizeAddress(
 );
 
 const PLATFORM_SOLANA_ADDRESS = process.env.X402_PLATFORM_SOL_ADDRESS
-  ? normalizeSolanaAddress(process.env.X402_PLATFORM_SOL_ADDRESS)
+  ? tryNormalizeSolanaAddress(process.env.X402_PLATFORM_SOL_ADDRESS)
   : null;
 
 const getNetworkGroup = (network?: SupportedX402Network | null): NetworkGroup =>
@@ -319,7 +319,7 @@ async function buildPaymentRequirement(
       title: `Purchase: ${article.title}`,
       category: article.categories?.[0] || 'content',
       tags: article.categories || ['article', 'content'],
-      serviceName: 'Penny.io Article Access',
+      serviceName: 'WritingAndEarn.xyz Article Access',
       serviceDescription: `Unlock full access to "${article.title}" by ${article.authorAddress.slice(0, 6)}...${article.authorAddress.slice(-4)}`,
       gasLimit: '1000000',
       ...(feePayer ? { feePayer } : {}),
@@ -652,11 +652,24 @@ router.post('/articles', writeLimiter, validate(createArticleSchema), async (req
     };
 
     res.status(201).json(response);
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error creating article:', error);
+    const errorMessage = error?.message || 'Failed to create article';
+    const errorCode = error?.code || 'UNKNOWN_ERROR';
+    
+    // Log detailed error for debugging
+    if (error?.code) {
+      console.error('Database error code:', error.code);
+      console.error('Database error details:', error.details);
+      console.error('Database error hint:', error.hint);
+    }
+    
     const response: ApiResponse<never> = {
       success: false,
-      error: 'Failed to create article'
+      error: errorMessage,
+      message: errorCode === 'PGRST204' || errorCode === '42703' 
+        ? 'Database schema mismatch. Please run migrations.' 
+        : undefined
     };
     res.status(500).json(response);
   }
@@ -1194,7 +1207,7 @@ router.post('/articles/:id/purchase', criticalLimiter, async (req: Request, res:
 });
 
 // Donate endpoint 
-// POST /api/donate - Donate to Penny.io platform
+// POST /api/donate - Donate to WritingAndEarn.xyz platform
 router.post('/donate', criticalLimiter, async (req: Request, res: Response) => {
   try {
     const { amount } = req.body;
@@ -1242,7 +1255,7 @@ router.post('/donate', criticalLimiter, async (req: Request, res: Response) => {
       network: networkPreference,
       maxAmountRequired: amountInMicroUSDC.toString(),
       resource: `${req.protocol}://${req.get('host')}/api/donate?network=${networkPreference}`,
-      description: `Donation to Penny.io platform - $${amount}`,
+      description: `Donation to WritingAndEarn.xyz platform - $${amount}`,
       mimeType: 'application/json',
       payTo,
       maxTimeoutSeconds: 900,
@@ -1257,11 +1270,11 @@ router.post('/donate', criticalLimiter, async (req: Request, res: Response) => {
       extra: {
         name: networkPreference === 'base' ? 'USD Coin' : 'USDC',
         version: '2',
-        title: `Donate $${amount} to Penny.io`,
+        title: `Donate $${amount} to WritingAndEarn.xyz`,
         category: 'donation',
         tags: ['donation', 'platform-support'],
-        serviceName: 'Penny.io Platform Donation',
-        serviceDescription: `Support Penny.io platform with a $${amount} donation`,
+        serviceName: 'WritingAndEarn.xyz Platform Donation',
+        serviceDescription: `Support WritingAndEarn.xyz platform with a $${amount} donation`,
         ...(feePayer ? { feePayer } : {}),
         pricing: {
           currency: 'USD',
@@ -1447,7 +1460,7 @@ router.post('/articles/:id/tip', criticalLimiter, async (req: Request, res: Resp
         title: `Tip $${amount} to author`,
         category: 'tip',
         tags: ['tip', 'author-support', 'article'],
-        serviceName: 'Penny.io Article Tip',
+        serviceName: 'WritingAndEarn.xyz Article Tip',
         serviceDescription: `Tip the author of "${article.title}" with $${amount}`,
         ...(feePayer ? { feePayer } : {}),
         pricing: {

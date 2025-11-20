@@ -49,7 +49,7 @@ export interface PaymentExecutionContext {
 
 class X402PaymentService {
   private facilitatorUrl = import.meta.env.VITE_X402_FACILITATOR_URL || 'https://x402.org/facilitator';
-  private network: SupportedNetwork = (import.meta.env.VITE_X402_NETWORK === 'base' ? 'base' : 'base-sepolia');
+  private network: SupportedNetwork = (import.meta.env.VITE_X402_NETWORK || 'base') as SupportedNetwork;
   private readonly X402_VERSION = 1;
   private readonly apiBase = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api').replace(/\/$/, '');
 

@@ -1,8 +1,8 @@
-# Penny.io Technical Overview
+# WritingAndEarn.xyz Technical Overview
 
 _Version 1.0 – Prepared for GitHub publication and mirrored as an on-chain article._
 
-This document expands on the README by focusing on the implementation details that make Penny.io a wallet-native publishing platform. It is written for engineers, protocol reviewers, and investors who want to understand how the dApp works under the hood, not as marketing collateral.
+This document expands on the README by focusing on the implementation details that make WritingAndEarn.xyz a wallet-native publishing platform. It is written for engineers, protocol reviewers, and investors who want to understand how the dApp works under the hood, not as marketing collateral.
 
 ---
 
@@ -10,7 +10,7 @@ This document expands on the README by focusing on the implementation details th
 
 1. [System Context](#system-context)  
 2. [x402 Protocol Primer](#x402-protocol-primer)  
-3. [x402 in Penny.io](#x402-in-pennyio)  
+3. [x402 in WritingAndEarn.xyz](#x402-in-writingandearnxyz)  
 4. [Privacy Model](#privacy-model)  
 5. [Security Architecture](#security-architecture)  
 6. [Wallet Management](#wallet-management)  
@@ -83,7 +83,7 @@ Key concepts:
 
 ---
 
-## x402 in Penny.io
+## x402 in WritingAndEarn.xyz
 
 ### Requirement Payload
 
@@ -94,12 +94,12 @@ When the frontend requests `/api/articles/:id/purchase`, the backend returns:
   "scheme": "exact",
   "network": "base",
   "maxAmountRequired": "10000",   // micro USDC
-  "resource": "https://api.penny.io/api/articles/92/purchase?network=base",
+  "resource": "https://api.writingandearn.xyz/api/articles/92/purchase?network=base",
   "payTo": "0xAuthorWallet...",
   "asset": "0xUSDC...",
   "extra": {
     "title": "Purchase: Test article 1",
-    "serviceName": "Penny.io Article Access",
+    "serviceName": "WritingAndEarn.xyz Article Access",
     "gasLimit": "1000000",
     "pricing": { "currency": "USD Coin", "amount": "0.01" }
   }
@@ -317,7 +317,7 @@ CREATE TABLE payments (
 
 ## Performance & Benchmarks
 
-| Operation                      | Penny.io (x402) | Traditional credit card | On-chain transfer (L2) |
+| Operation                      | WritingAndEarn.xyz (x402) | Traditional credit card | On-chain transfer (L2) |
 |--------------------------------|-----------------|-------------------------|------------------------|
 | Authorization to unlock        | **3–5 seconds** (single wallet popup) | 15–60 seconds (3DS flow) | 15–30 seconds          |
 | Settlement availability to author | Immediate (if using facilitator) | T+1 to T+3 days          | Immediate once mined   |
@@ -371,4 +371,4 @@ For a full API reference, see `backend/src/routes.ts` or the inline JSDoc commen
 
 ---
 
-_Questions or contributions? Open an issue or PR. For security disclosures, email security@penny.io._
+_Questions or contributions? Open an issue or PR. For security disclosures, email security@writingandearn.xyz._

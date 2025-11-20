@@ -17,7 +17,7 @@ import { modal } from '../appkit';
  * automatic reconnection prompts from wallets like Phantom.
  */
 
-const DISCONNECT_FLAG_KEY = 'penny_wallet_disconnected';
+const DISCONNECT_FLAG_KEY = 'writingandearn_wallet_disconnected';
 
 export function useWalletConnectionManager() {
   const { isConnected, address } = useAppKitAccount();

@@ -4,7 +4,7 @@ interface PennyPenIconProps {
 }
 
 /**
- * Custom icon representing the Penny.io brand concept:
+ * Custom icon representing the WritingAndEarn.xyz brand concept:
  * An article/document with a coin overlay symbolizing micropayments for content
  */
 function PennyPenIcon({ size = 24, className = '' }: PennyPenIconProps) {

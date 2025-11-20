@@ -7,7 +7,7 @@ function Header() {
     <header className="header">
       <div className="container">
         <Link to="/" className="logo">
-          <h1>Penny.io</h1>
+          <h1>WritingAndEarn.xyz</h1>
         </Link>
         <nav className="nav">
           <Link to="/explore" className="link">

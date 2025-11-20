@@ -10,10 +10,10 @@ const networks: [AppKitNetwork, ...AppKitNetwork[]] = [base, baseSepolia, solana
 const projectId = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID;
 
 const metadata = {
-  name: 'Penny.io',
+  name: 'WritingAndEarn.xyz',
   description: 'Content Monetization Reimagined',
   url: window.location.origin,
-  icons: ['https://penny.io/icon.png'],
+  icons: ['https://writingandearn.xyz/icon.png'],
 };
 
 const wagmiAdapter = new WagmiAdapter({

@@ -74,7 +74,7 @@ pgPool.on('connect', () => {
   console.log('✅ PostgreSQL pool connected to Supabase');
 });
 
-pgPool.on('error', (err) => {
+pgPool.on('error', (err: Error) => {
   console.error('❌ Unexpected PostgreSQL pool error:', err);
 });
 

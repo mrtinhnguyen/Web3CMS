@@ -310,7 +310,7 @@ function Article() {
   const getNetworkFromChain = (chainId?: number): SupportedNetwork => {
     if (chainId === 8453) return 'base';
     if (chainId === 84532) return 'base-sepolia';
-    return 'base-sepolia';
+    return 'base';
   };
   const authorNetworkLabel = formatSupportedNetworks(authorNetworks);
 

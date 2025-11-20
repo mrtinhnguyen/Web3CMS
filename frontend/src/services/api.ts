@@ -123,6 +123,14 @@ class ApiService {
 
       return data;
     } catch (error) {
+      // Ignore AbortError (from cancelled requests)
+      if (error instanceof Error && error.name === 'AbortError') {
+        return {
+          success: false,
+          error: 'Request cancelled',
+        };
+      }
+      
       console.error('API request failed:', error);
       return {
         success: false,

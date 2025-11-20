@@ -126,7 +126,7 @@ class Database {
 
     if (error) throw error;
 
-    return (data || []).map(row => ({
+    return (data || []).map((row: any) => ({
       id: row.id,
       authorUuid: row.author_uuid,
       address: row.address,
@@ -211,7 +211,7 @@ class Database {
     const { data, error } = await query;
 
     if (error) throw error;
-    return (data || []).map(row => this.parseArticleFromRow(row));
+    return (data || []).map((row: any) => this.parseArticleFromRow(row));
   }
 
   async createArticle(article: Omit<Article, 'id'>): Promise<Article> {
@@ -680,7 +680,7 @@ class Database {
       .order('updated_at', { ascending: false });
 
     if (error) throw error;
-    return data.map(row => this.parseDraftFromRow(row));
+    return data.map((row: any) => this.parseDraftFromRow(row));
   }
 
   async deleteDraft(draftId: number, authorAddress: string): Promise<boolean> {
